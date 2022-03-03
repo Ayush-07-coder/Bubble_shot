@@ -1,0 +1,398 @@
+<html>
+<head>
+<title>BUbble</title>
+</head>
+<style>
+body{
+padding:0px;
+margin:0px;
+}
+.div1{
+width: 70px;
+height: 70px;
+border-radius:50%;
+border-style:double;
+border: 1px solid black;
+margin:7px;
+animation: move 3.5s linear infinite;
+transition:0.3s;
+display:block;
+border:none;
+box-shadow: inset 5px 5px 10px #9b9b9b,
+            inset -5px -5px 10px #ffffff;
+
+}
+.main{
+position:absolute;
+bottom:0px;
+display:flex;
+justify-content:space-between;
+}
+.Score, .level{
+width:190px;
+height:140px;
+border:2px solid black;
+padding:5px;
+margin:5px;
+border-radius:3px;
+text-decoration:bold;
+//overflow:auto;
+}
+.top{
+display:flex;
+justify-content: space-between;
+user-select: none;
+}
+.start{
+width:290px;
+height:100px;
+border:1px solid black;
+border-radius:5px;
+text-align:center;
+}
+.start_game, .stop_game{
+padding:5px 20px;
+margin-top:20px;
+}
+.low, .medium, .heigh, .dark, .day{
+padding : 1px 10px;;
+width:100%;
+margin-top:13px;
+}
+@keyframes move{
+0%{transform:translateY(0px);
+	background-color:pink;}
+50%{transform:translateY(-400px);
+	background-color:blue;}
+75%{background-color:orange;}
+80%{background-color:gray;}
+90%{background-color:yellow;}
+100%{transform:tranlateY(0px);
+	background-color:red;}
+}
+@keyframe move2{
+0{transform:tranlateY(0);}
+100%{transform:transalteY(0);}
+}
+.logo{
+font-size: 60px;
+letter-spacing: 9;
+animation : logo 3s linear infinite;
+transition:0.2s;
+}
+#restart{
+padding: 10 30;
+border: none;
+border-radius: 16px;
+letter-spacing: 1px;
+background-color: red;
+transition: 0.3s;
+}
+#restart:hover{
+background-color: green;
+}
+@keyframes logo{
+0%{color:orange;
+	font-size:60px;}
+25%{color:pink;
+	font-size:61px;}
+50%{color:red;
+	font-size:62px;}}
+75%{color:blue;
+	font-size:63px;}}
+100%{color:yellow;
+	font-size:70px;}}
+}
+
+#div0{
+animation-delay:0.4s;
+}
+#div2{
+animation-delay:0.2s;
+}
+#div3{
+animation-delay:0.1s;
+}
+#div4{
+animation-delay:0.4s;
+}
+#div5{
+animation-delay:0.5s;
+}
+#div6{
+animation-delay:0.9s;
+}
+#div7{
+animation-delay:1s;
+}
+#div8{
+animation-delay:0.8s;
+}
+#div10{
+animation-delay:0.6s;
+}
+#div11{
+animation-delay:0.1s;
+}
+#div12{
+animation-delay:1.1s;
+}
+#div13{
+animation-delay:1.2s;
+}
+#div14{
+animation-delay:1.3s;
+}
+#div15{
+animation-delay:0.6s;
+}
+#div16{
+animation-delay:1.5s;
+}
+
+/*onClick="window.location.reload(true)"*/
+
+</style>
+<body>
+<div style=" background-color: lawngreen; width: 400px; height: 200px; border: 5px solid red; border-radius:5px; text-align:center; left:50%; top:50%; transform:translate(-50%,-50%); position:absolute; display:none; z-index: 1;" id="result">
+<h1 style="color:red; font-size:50px;">Game Over !!</h1>
+<button type="button" id="restart"><b>Play Again</b></button>
+</div>
+<div class="back">
+<div class="top"> 
+<div class="Score">
+<b>
+<span class="timer">Timer : </span>
+<span id="timer"></span><br><br>
+<span>Score : </span>
+<span class="score1"></span><br><center>
+<button type="button" class="start_game" onClick="window.location.reload(true)">Start</button>
+<button type="button" class="stop_game" id="stop">stop</button></center></b>
+</div>
+<div>
+<p class="logo">BUBBLE's SHOT !!</p>
+</div>
+<div class="score">
+<button type="button" class="low">Low</button>
+<button type="button" class="Medium">Medium</button>
+<button type="button" class="Heigh">Heigh</button>
+<button type="button" class="dark">Dark Mode</button>
+
+</div>
+</div>
+<div class="main">
+<div class="div1" id="div0"></div>
+<div class="div1" id="div2"></div>
+<div class="div1" id="div3"></div>
+<div class="div1" id="div4"></div>
+<div class="div1" id="div5"></div>
+<div class="div1" id="div6"></div>
+<div class="div1" id="div7"></div>
+<div class="div1" id="div8"></div>
+<div class="div1" id="div9"></div>
+<div class="div1" id="div10"></div>
+<div class="div1" id="div11"></div>
+<div class="div1" id="div12"></div>
+<div class="div1" id="div13"></div>
+<div class="div1" id="div14"></div>
+<div class="div1" id="div15"></div>
+<div class="div1" id="div16"></div>
+</div>
+</div>
+
+<script>
+ window.score = 0;
+
+/*for stop a game*/
+
+document.querySelector('.stop_game').addEventListener('click', function(){
+let num = document.querySelectorAll('.div1');
+for(var i=0; i<=num.length; i++){
+num[i].style.animation = "move2 3.5s linear infinite";
+num[i].style.background = "red";
+}
+});
+
+
+document.querySelector('#div0').addEventListener('click', function(){
+document.querySelector('#div0').style.display = 'none';
+score++;
+document.querySelector('.score1').textContent = score;
+});
+document.querySelector('#div2').addEventListener('click', function(){
+document.querySelector('#div2').style.display = 'none';
+score++;
+document.querySelector('.score1').textContent = score;
+});
+document.querySelector('#div3').addEventListener('click', function(){
+document.querySelector('#div3').style.display = 'none';
+score++;
+document.querySelector('.score1').textContent = score;
+});
+document.querySelector('#div4').addEventListener('click', function(){
+document.querySelector('#div4').style.display = 'none';
+score++;
+document.querySelector('.score1').textContent = score;
+});
+document.querySelector('#div2').addEventListener('click', function(){
+document.querySelector('#div2').style.display = 'none';
+score++;
+document.querySelector('.score1').textContent = score;
+});
+document.querySelector('#div5').addEventListener('click', function(){
+document.querySelector('#div5').style.display = 'none';
+score++;
+document.querySelector('.score1').textContent = score;
+});
+document.querySelector('#div6').addEventListener('click', function(){
+document.querySelector('#div6').style.display = 'none';
+score++;
+document.querySelector('.score1').textContent = score;
+});
+document.querySelector('#div7').addEventListener('click', function(){
+document.querySelector('#div7').style.display = 'none';
+score++;
+document.querySelector('.score1').textContent = score;
+});
+document.querySelector('#div8').addEventListener('click', function(){
+document.querySelector('#div8').style.display = 'none';
+score++;
+document.querySelector('.score1').textContent = score;
+});
+document.querySelector('#div9').addEventListener('click', function(){
+document.querySelector('#div9').style.display = 'none';
+score++;
+document.querySelector('.score1').textContent = score;
+});
+document.querySelector('#div10').addEventListener('click', function(){
+document.querySelector('#div10').style.display = 'none';
+score++;
+document.querySelector('.score1').textContent = score;
+});
+document.querySelector('#div11').addEventListener('click', function(){
+document.querySelector('#div11').style.display = 'none';
+score++;
+document.querySelector('.score1').textContent = score;
+});
+document.querySelector('#div12').addEventListener('click', function(){
+document.querySelector('#div12').style.display = 'none';
+score++;
+document.querySelector('.score1').textContent = score;
+});
+document.querySelector('#div13').addEventListener('click', function(){
+document.querySelector('#div13').style.display = 'none';
+score++;
+document.querySelector('.score1').textContent = score;
+});
+document.querySelector('#div14').addEventListener('click', function(){
+document.querySelector('#div14').style.display = 'none';
+score++;
+document.querySelector('.score1').textContent = score;
+});
+document.querySelector('#div15').addEventListener('click', function(){
+document.querySelector('#div15').style.display = 'none';
+score++;
+document.querySelector('.score1').textContent = score;
+});
+document.querySelector('#div16').addEventListener('click', function(){
+document.querySelector('#div16').style.display = 'none';
+score++;
+document.querySelector('.score1').textContent = score;
+
+});
+
+
+/* for heigh speed of bubbles */
+
+document.querySelector('.heigh').addEventListener('click', function(){
+let num = document.querySelectorAll('.div1');
+for(var i=0; i<=num.length; i++){
+num[i].style.animationDuration = "1.5s";
+}
+});
+
+/* for medium speed of bubbles */
+
+document.querySelector('.medium').addEventListener('click', function(){
+let num = document.querySelectorAll('.div1');
+for(var i=0; i<=num.length; i++){
+num[i].style.animationDuration = "2.5s";
+}
+});
+
+/* for low speed of bubbles */
+
+document.querySelector('.low').addEventListener('click', function(){
+let num = document.querySelectorAll('.div1');
+for(var i=0; i<=num.length; i++){
+num[i].style.animationDuration = "4s";
+}
+});
+
+/* dark and dark mode */
+document.querySelector('.dark').addEventListener('click', function(){
+let num = document.querySelector('.dark');
+if(num.textContent === "Dark Mode"){
+document.querySelector('.dark').textContent = "Day mode";
+document.querySelector('body').style.background = "black";
+let num = document.querySelectorAll('.score');
+for(var i=0; i<=num.length; i++){
+num[i].style.background = "green";
+}
+}
+else{
+document.querySelector('.dark').textContent = "Dark Mode";
+document.querySelector('body').style.background = "white";
+let num = document.querySelectorAll('.score');
+for(var i=0; i<=num.length; i++){
+num[i].style.background = "white";
+}
+}
+});
+
+/*day mode
+document.querySelector('.day').addEventListener('click', function(){
+document.querySelector('body').style.background = "white";
+let num = document.querySelectorAll('.score');
+for(var i=0; i<=num.length; i++){
+num[i].style.background = "white";
+}
+});*/
+
+document.querySelector('#restart').addEventListener('click', function(){
+document.querySelector('#result').style.display = 'none';
+});
+
+/*when game is stop then no click is disable on bubbles*/
+
+document.querySelector('#stop').addEventListener('click', function(){
+let num = document.querySelectorAll('.div1');
+for(var i=0; i<=num.length; i++){
+num[i].style.pointerEvents = "none";
+}
+});
+
+/*make a timer*/
+
+var timeleft = 10;
+var downloadTimer = setInterval(function(){
+  if(timeleft <= 0){
+    clearInterval(downloadTimer);
+    document.getElementById("timer").innerHTML = "Time Up !!";
+    document.querySelector('#result').style.display = 'block';
+    let num = document.querySelectorAll('.div1');
+    for(var i=0; i<=num.length; i++){
+    num[i].style.pointerEvents = "none";
+    document.querySelector('.top').style.opacity = ".8";
+    document.querySelector('.main').style.opacity = ".8";
+    }
+    navigator.vibrate(1000);
+  } else {
+    document.getElementById("timer").innerHTML = timeleft;
+  }
+  timeleft -= 1;
+}, 1000);
+
+</script>
+</body>
+</html>
